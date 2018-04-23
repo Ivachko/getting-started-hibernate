@@ -1,5 +1,7 @@
 package fr.epsi.model;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
@@ -15,24 +17,12 @@ public class User implements Serializable {
     private String lastname;
     @Column(unique = true)
     private String email;
+    @Column
+    private Date birthday;
+    @Formula("SELECT DATEDIFF()")
+    private int age;
 
-    public Date getBithday() {
-        return bithday;
-    }
 
-    public void setBithday(Date bithday) {
-        this.bithday = bithday;
-    }
-
-    private Date bithday;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;
@@ -56,5 +46,17 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public int getAge() {
+        return age;
     }
 }
