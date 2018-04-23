@@ -1,13 +1,11 @@
 package fr.epsi.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user",indexes = {@Index(name = "emailIndex",columnList = "email")})
 public class User implements Serializable {
 
     @Id
@@ -15,6 +13,18 @@ public class User implements Serializable {
     private long id;
     private String firstname;
     private String lastname;
+    @Column(unique = true)
+    private String email;
+
+    public Date getBithday() {
+        return bithday;
+    }
+
+    public void setBithday(Date bithday) {
+        this.bithday = bithday;
+    }
+
+    private Date bithday;
 
     public long getId() {
         return id;
@@ -38,5 +48,13 @@ public class User implements Serializable {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
