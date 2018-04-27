@@ -20,7 +20,7 @@ public class UserDaoTest {
         user.setEmail(mail + "@epsi.fr");
         user.setBirthday(new Date(1997,04,18));
         System.out.println(new UserDao().save(user));
-        System.out.println(user.getAge());
+        //System.out.println(user.getAge());
     }
 
     @Test

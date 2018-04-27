@@ -1,10 +1,9 @@
 package fr.epsi.model;
 
-import org.hibernate.annotations.Formula;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "user",indexes = {@Index(name = "emailIndex",columnList = "email")})
@@ -19,9 +18,13 @@ public class User implements Serializable {
     private String email;
     @Column
     private Date birthday;
-    @Formula("SELECT DATEDIFF()")
-    private int age;
+    //@Formula("SELECT DATEDIFF(CURRENT_DATE() birthday)")
+    //private int age;
 
+
+
+    @OneToMany(mappedBy = "user")
+    private Set<Tweet> tweets;
 
 
     public String getFirstname() {
@@ -56,7 +59,15 @@ public class User implements Serializable {
         this.birthday = birthday;
     }
 
-    public int getAge() {
+   /* public int getAge() {
         return age;
+    }*/
+   public Set<Tweet> getTweets() {
+       return tweets;
+   }
+
+    public void setTweets(Set<Tweet> tweets) {
+        this.tweets = tweets;
     }
+
 }
